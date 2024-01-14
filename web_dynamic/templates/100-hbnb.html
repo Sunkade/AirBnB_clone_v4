@@ -1,78 +1,69 @@
+<!-- web_dynamic/templates/100-hbnb.html -->
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
-    <link type="text/css" rel="stylesheet" href="../static/styles/8-places.css">
-    <link rel="icon" href="../static/images/icon.png" />
-    <title>HBnB</title>
-  </head>
-  <body>
-    <header>
-      <div class="logo"></div>
-    </header>
-    <div class="container">
-      <section class="filters">
-	<div class="locations">
-	  <h3>States</h3>
-	  <h4>&nbsp;</h4>
-	  <div class="popover">
-	    <ul>
-	      {% for state in states %}
-	      <li>
-		<h2>{{ state[0].name }}:</h2>
-		<ul>
-		  {% for city in state[1] %}
-		  <li>{{ city.name }}</li>
-		  {% endfor %}
-		</ul>
-	      </li>
-	      {% endfor %}
-	    </ul>
-	  </div>
-	</div>
-	<div class="amenities">
-	  <h3>Amenities</h3>
-	  <h4>&nbsp;</h4>
-	  <div class="popover">
-	    <ul>
-	      {% for amenity in amenities %}
-	      <li>{{ amenity.name }}</li>
-	      {% endfor %}
-	    </ul>
-	  </div>
-	</div>
-	<button type="button">Search</button>
-      </section>
-      <div class="placesh1"><h1>Places</h1></div>
-      <section class="places">
-	<!-- <h1>Places</h1> -->
-	{% for place in places %}
-	<article>
-	  <div class="title_box">
-	    <h2>{{ place.name }}</h2>
-	    <div class="price_by_night">${{ place.price_by_night }}</div>
-	  </div>
-	  <div class="information">
-	    <div class="max_guest">{{ place.max_guest }} Guest{% if place.max_guest != 1 %}s{% endif %}</div>
-            <div class="number_rooms">{{ place.number_rooms }} Bedroom{% if place.number_rooms != 1 %}s{% endif %}</div>
-            <div class="number_bathrooms">{{ place.number_bathrooms }} Bathroom{% if place.number_bathrooms != 1 %}s{% endif %}</div>
-	  </div>
-	  <div class="user">
-            <b>Owner:</b> {{ place.user.first_name }} {{ place.user.last_name }}
-          </div>
-          <div class="description">
-	    {{ place.description | safe }}
-          </div>
-	</article>
-	{% endfor %}
-      </section>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100-hbnb</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/100-hbnb.js') }}?cache_id={{ cache_id }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?cache_id={{ cache_id }}">
+    <!-- Add more link tags for other stylesheets with the cache_id as query string -->
+</head>
+<body>
+    <div id="amenities">
+        <ul>
+            <li>
+                <input type="checkbox" data-id="1" data-name="Amenity 1" style="margin-left: 10px;">
+                Amenity 1
+            </li>
+            <li>
+                <input type="checkbox" data-id="2" data-name="Amenity 2" style="margin-left: 10px;">
+                Amenity 2
+            </li>
+            <!-- Add more amenity checkboxes as needed -->
+        </ul>
     </div>
-    <footer>
-      <p>Holberton School</p>
-    </footer>
-  </body>
+    <div>
+        <h4>Amenities:</h4>
+        <p id="selected-amenities"></p>
+    </div>
+    <div id="header">
+        <div id="api_status" class="available"></div>
+    </div>
+    <section class="places">
+        <!-- Places will be dynamically loaded here using JavaScript -->
+    </section>
+    <div id="locations">
+        <h4>Locations:</h4>
+        <p id="selected-locations"></p>
+        <ul>
+            <!-- Add li tags for States with checkbox and data attributes -->
+            <li>
+                <input type="checkbox" data-id="1" data-name="State 1" style="margin-left: 10px;">
+                State 1
+            </li>
+            <li>
+                <input type="checkbox" data-id="2" data-name="State 2" style="margin-left: 10px;">
+                State 2
+            </li>
+            <!-- Add more states as needed -->
+        </ul>
+        <ul>
+            <!-- Add li tags for Cities with checkbox and data attributes -->
+            <li>
+                <input type="checkbox" data-id="1" data-name="City 1" style="margin-left: 10px;">
+                City 1
+            </li>
+            <li>
+                <input type="checkbox" data-id="2" data-name="City 2" style="margin-left: 10px;">
+                City 2
+            </li>
+            <!-- Add more cities as needed -->
+        </ul>
+    </div>
+    <button id="filter-btn">Apply Filter</button>
+</body>
 </html>
+
